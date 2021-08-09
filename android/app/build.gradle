@@ -1,3 +1,4 @@
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 apply plugin: "com.android.application"
 
 import com.android.build.OutputFile
@@ -78,8 +79,10 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
+    entryFile: "index.js",
     enableHermes: false,  // clean and rebuild if changing
 ]
+
 
 apply from: "../../node_modules/react-native/react.gradle"
 
