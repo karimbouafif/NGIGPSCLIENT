@@ -23,6 +23,8 @@ const colors = {
   gray11: '#CCC',
   backdrop: '#313131',
   iconBlack: '#1E201D',
+  navbarBackgroundColor: '#2c3e50',
+  statusBarColor: '#233240'
 };
 
 export const theme = {

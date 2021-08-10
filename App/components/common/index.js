@@ -11,6 +11,7 @@ import CheckBox from './CheckBox';
 import Calendar from './Calendar';
 import Footer from './Footer';
 import Avatar from './Avatar';
+import Cart from './Cart';
 
 export {
   Text,
@@ -25,4 +26,5 @@ export {
   Calendar,
   Footer,
   Avatar,
+  Cart
 };

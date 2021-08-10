@@ -103,8 +103,8 @@ const TabButton = ({isFocused, descriptors, navigation, route}) => {
     label = 'My Task';
   } else if (name === 'Menu') {
     iconName = 'menu';
-  } else if (name === 'Quick') {
-    iconName = 'list';
+  } else if (name === 'Notifications') {
+    iconName = 'notifications';
   } else {
     iconName = 'person-outline';
   }

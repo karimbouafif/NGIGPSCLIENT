@@ -6,7 +6,7 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import Today from './Today';
 import Month from './Month';
 import {useTheme} from '../../../../config/theme';
-import {IconButton, Text, Icon} from '../../../../components/common';
+import {IconButton, Text} from '../../../../components/common';
 import {
   Menu,
   MenuOptions,
