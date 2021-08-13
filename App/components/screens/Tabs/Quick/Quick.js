@@ -26,7 +26,7 @@ export default function Quick() {
     useEffect(() => {
         const fetchData = async () => {
             const result = await axios(
-                'http://192.168.1.16:4000/api/missions/6065d78ee7101b2b584a765a',
+                'http://192.168.2.139:4000/api/missions/60b0c7026699d7727c4b82f7',
             );
             console.log("Affichage les missions by user   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             console.log(result.data);

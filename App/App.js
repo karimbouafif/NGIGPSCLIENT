@@ -5,7 +5,13 @@ import {NavigationContainer} from '@react-navigation/native';
 import {MenuProvider} from 'react-native-popup-menu';
 import ThemeProvider, {theme} from '../App/config/theme';
 import Screens from '../App/components/screens';
+import { ActivityIndicator } from 'react-native';
+import { Provider, useSelector } from 'react-redux';
+import { PersistGate } from 'redux-persist/es/integration/react';
+import configureStore from '../App/Store';
 
+
+const { persistor, store } = configureStore();
 export default function App() {
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -15,6 +21,8 @@ export default function App() {
     }, []);
 
     return (
+        <Provider store={store}>
+            <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
         <MenuProvider
             backHandler
             customStyles={{
@@ -23,11 +31,14 @@ export default function App() {
                     opacity: 0.3,
                 },
             }}>
+
             <ThemeProvider value={theme}>
                 <NavigationContainer>
                     <Screens />
                 </NavigationContainer>
             </ThemeProvider>
         </MenuProvider>
+        </PersistGate>
+        </Provider>
     );
 }

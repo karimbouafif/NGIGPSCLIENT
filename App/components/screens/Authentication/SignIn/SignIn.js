@@ -1,17 +1,41 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Text, Container, Header, Button, TextInput} from '../../../../components/common';
 import {useTheme} from '../../../../config/theme';
-
+import { useDispatch, useSelector } from 'react-redux';
+import * as loginActions from '../../../../Store/actions/loginActions';
+import { ILoginState } from '../../../../models/reducers/login';
 const styles = StyleSheet.create({
   forgotPassword: {
     alignItems: 'flex-end',
   },
 });
+interface IState {
+  loginReducer: ILoginState;
 
+}
 export default function SignIn({navigation}) {
   const theme = useTheme();
   const passwordRef = useRef(null);
+  const [emaillogin, setEmail] = useState("karim.bouafif@esprit.tn");
+  const [passwordlogin, setPassword] = useState("123456");
+  const {user} = useSelector((state: IState) => state.loginReducer);
+  const dispatch = useDispatch();
+  const onLogin = () => {
+
+
+
+    const userData = {
+      email: emaillogin,
+      password: passwordlogin
+    };
+
+    dispatch(loginActions.loginUser(userData));
+    navigation.navigate("Home")
+    console.log('rvftvfvttfv');
+    console.log(user);
+  }
+
   return (
     <>
       <Header onPressLeftIcon={() => navigation.goBack()} />
@@ -25,9 +49,11 @@ export default function SignIn({navigation}) {
             paddingVertical: theme.spacing.space(6),
           }}>
           <TextInput
-            label="Username"
-            placeholder="Enter your username"
+            label="Email"
+            placeholder="Enter your Email"
             returnKeyType="next"
+            onChangeText={(text) => setEmail(text)}
+            defaultValue={emaillogin}
             blurOnSubmit={false}
             onSubmitEditing={() => passwordRef.current.focus()}
             style={{
@@ -36,8 +62,10 @@ export default function SignIn({navigation}) {
           />
           <TextInput
             ref={passwordRef}
+            onChangeText={(text) => setPassword(text)}
             label="Password"
             placeholder="Enter your password"
+            defaultValue={passwordlogin}
             secureTextEntry
           />
           <View style={styles.forgotPassword}>
@@ -48,7 +76,7 @@ export default function SignIn({navigation}) {
             </Button>
           </View>
         </View>
-        <Button color="primary" onPress={() => navigation.navigate('Home')}>
+        <Button color="primary"  onPress={() => onLogin()}>
           Log In
         </Button>
       </Container>
