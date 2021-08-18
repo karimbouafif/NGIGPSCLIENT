@@ -3,5 +3,6 @@ export interface ILoginState {
   id: number;
   email: string;
   password: string;
+  fullname : string;
   user:{}
 }

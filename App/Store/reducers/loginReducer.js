@@ -33,6 +33,7 @@ export const loginReducer = createReducer(initialState, {
         return {
             ...state,
             user: action.response.user,
+
             isLoggedIn: true,
         };
     },

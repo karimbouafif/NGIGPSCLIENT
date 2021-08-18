@@ -10,6 +10,8 @@ import { Badge } from 'react-native-paper';
 import axios from 'axios';
 const BUTTON_SIZE = 48;
 import { useFocusEffect } from "@react-navigation/native";
+import AsyncStorage from '@react-native-community/async-storage';
+import jwtDecode from 'jwt-decode';
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
@@ -163,19 +165,39 @@ const TabButton = ({isFocused, descriptors, navigation, route}) => {
 const TabButtonNotif = ({isFocused, descriptors, navigation, route}) => {
 
   const [data,setData] = useState([]);
+  const [userId,setUser] = useState('');
+
   useEffect(() => {
+
     const fetchData = async () => {
+      console.log("userC")
+      console.log(userId)
       const result = await axios(
-          'http://192.168.2.139:4000/api/missions/6065d78ee7101b2b584a765a',
+          'http://192.168.1.21:4000/api/missions/'+userId,
       );
       //console.log("Affichage les missions by user   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-     // console.log(result.data);
+      console.log(result.data);
+
       setData(result.data);
     };
 
     fetchData();
+  }, [userId]);
+  useEffect(() => {
+    AsyncStorage.getItem('token').then((token) => {
+      const user = jwtDecode(token);
+     // console.log("test aking tab bar")
+      //console.log(user);
+      setUser(user.id)
+
+
+
+    });
+
+
   }, []);
   const list = data.filter((item) => item.taskStatus === "waiting").length;
+
 
 
 

@@ -34,7 +34,7 @@ export const loginUser = userData => dispatch => {
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,
-                payload: {
+                payload : {
                     message: err.response.data,
                     visible: true
                 }
@@ -46,7 +46,8 @@ export const loginUser = userData => dispatch => {
 export const setCurrentUser = decoded => {
     return {
         type: SET_CURRENT_USER,
-        payload: decoded
+
+        user: decoded
     };
 };
 // Clear errors

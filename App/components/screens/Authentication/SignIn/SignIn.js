@@ -1,10 +1,14 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Text, Container, Header, Button, TextInput} from '../../../../components/common';
 import {useTheme} from '../../../../config/theme';
 import { useDispatch, useSelector } from 'react-redux';
 import * as loginActions from '../../../../Store/actions/loginActions';
 import { ILoginState } from '../../../../models/reducers/login';
+import {SET_CURRENT_USER} from '../../../../Store/actions/types'
+import AsyncStorage from '@react-native-community/async-storage';
+import jwtDecode  from 'jwt-decode';
+import axios from 'axios';
 const styles = StyleSheet.create({
   forgotPassword: {
     alignItems: 'flex-end',
@@ -17,10 +21,25 @@ interface IState {
 export default function SignIn({navigation}) {
   const theme = useTheme();
   const passwordRef = useRef(null);
-  const [emaillogin, setEmail] = useState("karim.bouafif@esprit.tn");
+  const [emaillogin, setEmail] = useState("jihed.galai@esprit.tn");
   const [passwordlogin, setPassword] = useState("123456");
   const {user} = useSelector((state: IState) => state.loginReducer);
   const dispatch = useDispatch();
+const {id}=useState('')
+  useEffect(() => {
+    AsyncStorage.getItem('token').then((token) => {
+      const user = jwtDecode(token);
+      console.log("test token")
+      console.log(user);
+
+
+
+    });
+
+
+  }, []);
+
+
   const onLogin = () => {
 
 
@@ -32,9 +51,8 @@ export default function SignIn({navigation}) {
 
     dispatch(loginActions.loginUser(userData));
     navigation.navigate("Home")
-    console.log('rvftvfvttfv');
-    console.log(user);
   }
+
 
   return (
     <>

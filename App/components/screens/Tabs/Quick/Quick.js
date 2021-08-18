@@ -7,6 +7,8 @@ import {useTheme} from '../../../../config/theme';
 import Item from '../MyTask/TaskList/Item';
 import axios from 'axios';
 import ItemNotif from '../MyTask/TaskList/ItemNotif';
+import AsyncStorage from '@react-native-community/async-storage';
+import jwtDecode from 'jwt-decode';
 
 const styles = StyleSheet.create({
     container: {
@@ -23,17 +25,36 @@ export default function Quick() {
     useScrollToTop(scrollRef);
 
     const [data,setData] = useState([]);
+    const [userId,setUser] = useState('');
+
     useEffect(() => {
+
         const fetchData = async () => {
+            console.log("userC")
+            console.log(userId)
             const result = await axios(
-                'http://192.168.2.139:4000/api/missions/60b0c7026699d7727c4b82f7',
+                'http://192.168.1.21:4000/api/missions/'+userId,
             );
-            console.log("Affichage les missions by user   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            //console.log("Affichage les missions by user   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             console.log(result.data);
+
             setData(result.data);
         };
 
         fetchData();
+    }, [userId]);
+    useEffect(() => {
+        AsyncStorage.getItem('token').then((token) => {
+            const user = jwtDecode(token);
+            // console.log("test aking tab bar")
+            //console.log(user);
+            setUser(user.id)
+
+
+
+        });
+
+
     }, []);
     return (
         <FlatList

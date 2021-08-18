@@ -12,7 +12,7 @@ export default function* loginAsync() {
     const response = { success: true, data: { id: 1 }, message: 'Success' };
 
     if (response.success) {
-        yield put(loginActions.onLoginResponse(response.data));
+        yield put(loginActions.setCurrentUser(response.data));
         yield put(loginActions.disableLoader());
 
         // no need to call navigate as this is handled by redux store with SwitchNavigator
