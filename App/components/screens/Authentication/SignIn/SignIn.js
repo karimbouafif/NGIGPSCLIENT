@@ -5,10 +5,9 @@ import {useTheme} from '../../../../config/theme';
 import { useDispatch, useSelector } from 'react-redux';
 import * as loginActions from '../../../../Store/actions/loginActions';
 import { ILoginState } from '../../../../models/reducers/login';
-import {SET_CURRENT_USER} from '../../../../Store/actions/types'
 import AsyncStorage from '@react-native-community/async-storage';
 import jwtDecode  from 'jwt-decode';
-import axios from 'axios';
+
 const styles = StyleSheet.create({
   forgotPassword: {
     alignItems: 'flex-end',

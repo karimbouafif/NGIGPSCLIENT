@@ -33,7 +33,7 @@ export default function Dropdown({data, onSelect}) {
   );
 }
 
-const Item = ({title, subtitle, onPress}) => {
+const Item = ({taskTitle, taskContent, onPress}) => {
   const theme = useTheme();
 
   return (
@@ -52,8 +52,8 @@ const Item = ({title, subtitle, onPress}) => {
           style={{
             paddingHorizontal: theme.spacing.m,
           }}>
-          <Text variant="searchTitle">{title}</Text>
-          <Text variant="searchSubtitle">{subtitle}</Text>
+          <Text variant="searchTitle">{taskTitle}</Text>
+          <Text variant="searchSubtitle">{taskContent}</Text>
         </View>
       </View>
     </RectButton>

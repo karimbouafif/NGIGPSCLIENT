@@ -34,7 +34,7 @@ export default function NewTask({navigation}) {
         },
       ]}>
       <Header
-        title="New Task"
+        title="Nouvelle  Réclamation"
         backgroundColor={theme.palatte.primary.main}
         barStyle="light-content"
         leftIcon="arrow-left"

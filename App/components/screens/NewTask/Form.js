@@ -1,10 +1,13 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ScrollView, View, StyleSheet} from 'react-native';
 import {Button, Text, FAB, Avatar} from '../../../components/common';
 import {useTheme} from '../../../config/theme';
 import TextInput, {TextField, RoundedInput} from './TextInput';
 import DatePicker from './DatePicker';
 import Dropdown from './Dropdown';
+import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
+import jwtDecode from 'jwt-decode';
 
 const members = new Array(4).fill(1);
 
@@ -35,7 +38,38 @@ export default function NewTaskForm() {
   const theme = useTheme();
   const [showResult, setResultVisible] = useState(false);
   const [assignee, setAssignee] = useState(null);
+    const [data,setData] = useState([]);
+    const [userId,setUser] = useState('');
 
+    useEffect(() => {
+
+        const fetchData = async () => {
+            console.log("userC")
+            console.log(userId)
+            const result = await axios(
+                'http://192.168.1.21:4000/api/missions/'+userId,
+            );
+            //console.log("Affichage les missions by user   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            console.log(result.data);
+
+            setData(result.data);
+        };
+
+        fetchData();
+    }, [userId]);
+    useEffect(() => {
+        AsyncStorage.getItem('token').then((token) => {
+            const user = jwtDecode(token);
+            // console.log("test aking tab bar")
+            //console.log(user);
+            setUser(user.id)
+
+
+
+        });
+
+
+    }, []);
   return (
     <ScrollView
       contentContainerStyle={[
@@ -62,7 +96,7 @@ export default function NewTaskForm() {
       </View>
       {showResult ? (
         <Dropdown
-          data={users}
+          data={data}
           onSelect={(item) => {
             setAssignee(item);
             setResultVisible(false);
@@ -80,35 +114,12 @@ export default function NewTaskForm() {
           <View style={{paddingVertical: theme.spacing.m}}>
             <DatePicker label="Due Date" />
           </View>
+
           <View
             style={{
               padding: theme.spacing.l,
             }}>
-            <Text variant="label">Add Member</Text>
-            <View
-              style={[
-                styles.members,
-                {
-                  paddingVertical: theme.spacing.m,
-                },
-              ]}>
-              {members.map((_, index) => (
-                <View
-                  key={index}
-                  style={{
-                    margin: theme.spacing.s,
-                  }}>
-                  <Avatar size={32} />
-                </View>
-              ))}
-              <FAB size={32} style={{backgroundColor: theme.colors.gray11}} />
-            </View>
-          </View>
-          <View
-            style={{
-              padding: theme.spacing.l,
-            }}>
-            <Button color="primary">Add Task</Button>
+            <Button color="primary">Ajouter Réclamation</Button>
           </View>
         </>
       )}

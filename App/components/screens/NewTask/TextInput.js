@@ -70,7 +70,7 @@ export function RoundedInput({
                 marginLeft: theme.spacing.s,
               },
             ]}>
-            {item.title}
+            {item.taskTitle}
           </Text>
         </View>
       ) : (
