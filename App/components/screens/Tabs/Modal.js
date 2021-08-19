@@ -38,19 +38,15 @@ const styles = StyleSheet.create({
 const actions = [
   {
     id: '1',
-    label: 'Add Task',
+    label: 'Ajouter Réclamation',
     route: 'NewTask',
   },
   {
     id: '2',
-    label: 'Add Quick Note',
-    route: 'NewQuickNote',
+    label: 'Afficher ma liste',
+    route: 'ViewTask',
   },
-  {
-    id: '3',
-    label: 'Add Check List',
-    route: 'NewCheckList',
-  },
+
 ];
 
 export default function ActionModal({visible, onRequestClose}) {

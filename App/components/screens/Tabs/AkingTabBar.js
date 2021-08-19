@@ -9,7 +9,6 @@ import {useTheme} from '../../../config/theme';
 import { Badge } from 'react-native-paper';
 import axios from 'axios';
 const BUTTON_SIZE = 48;
-import { useFocusEffect } from "@react-navigation/native";
 import AsyncStorage from '@react-native-community/async-storage';
 import jwtDecode from 'jwt-decode';
 const styles = StyleSheet.create({

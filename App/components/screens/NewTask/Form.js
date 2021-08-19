@@ -8,8 +8,9 @@ import Dropdown from './Dropdown';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import jwtDecode from 'jwt-decode';
+import * as reclamtionActions from '../../../Store/actions/reclamationActions';
+import { useDispatch, useSelector } from 'react-redux';
 
-const members = new Array(4).fill(1);
 
 const styles = StyleSheet.create({
   container: {
@@ -26,21 +27,17 @@ const styles = StyleSheet.create({
   },
 });
 
-const users = [
-  {
-    title: 'Stephen Chow',
-    subtitle: 'Stephenchow@company.com',
-    url: 'https://',
-  },
-];
 
 export default function NewTaskForm() {
   const theme = useTheme();
   const [showResult, setResultVisible] = useState(false);
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [cause, setCause] = useState("");
   const [assignee, setAssignee] = useState(null);
     const [data,setData] = useState([]);
     const [userId,setUser] = useState('');
-
+    const dispatch = useDispatch();
     useEffect(() => {
 
         const fetchData = async () => {
@@ -70,6 +67,26 @@ export default function NewTaskForm() {
 
 
     }, []);
+
+
+    const onLogin = () => {
+
+
+
+        const userData = {
+            titre: title,
+            description: description,
+            cause :cause,
+            mission:assignee,
+            user :userId
+        };
+        console.log(userData)
+        dispatch(reclamtionActions.addReclamation(userData));
+
+    }
+
+
+
   return (
     <ScrollView
       contentContainerStyle={[
@@ -87,12 +104,19 @@ export default function NewTaskForm() {
         ]}>
         <RoundedInput
           label="For"
-          placeholder="Assignee"
+          placeholder="Mission"
           item={assignee}
           onFocus={() => setResultVisible(true)}
           onBlur={() => setResultVisible(false)}
         />
-        <RoundedInput label="In" placeholder="Project" />
+        <RoundedInput
+
+            label="Cause"
+            placeholder="Reporter"
+            onChangeText={(text) => setCause(text)}
+            defaultValue={cause}
+
+        />
       </View>
       {showResult ? (
         <Dropdown
@@ -104,22 +128,33 @@ export default function NewTaskForm() {
         />
       ) : (
         <>
-          <TextInput placeholder="Title" />
+          <TextInput
+              placeholder="Title"
+              onChangeText={(text) => setTitle(text)}
+              defaultValue={title}
+
+
+          />
           <View
             style={{
               padding: theme.spacing.l,
             }}>
-            <TextField label="Description" />
+            <TextField
+
+                label="Description"
+                onChangeText={(text) => setDescription(text)}
+                defaultValue={description}
+
+            />
           </View>
-          <View style={{paddingVertical: theme.spacing.m}}>
-            <DatePicker label="Due Date" />
-          </View>
+
+
 
           <View
             style={{
               padding: theme.spacing.l,
             }}>
-            <Button color="primary">Ajouter Réclamation</Button>
+            <Button color="primary"  onPress={() => onLogin()}>Ajouter Réclamation</Button>
           </View>
         </>
       )}

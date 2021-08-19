@@ -1,4 +1,3 @@
-
 import {
     SET_CURRENT_USER,
     GET_ERRORS,

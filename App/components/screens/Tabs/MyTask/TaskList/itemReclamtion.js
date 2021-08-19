@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function ItemNotif({taskTitle,taskContent, taskTime, isCompleted}) {
+export default function ItemReclamation({titre,description, cause, isCompleted}) {
     const theme = useTheme();
     const slideX = useRef(new Animated.Value(0)).current;
     const [checked, setCheck] = useState(isCompleted);
@@ -189,7 +189,7 @@ export default function ItemNotif({taskTitle,taskContent, taskTime, isCompleted}
                             },
                         ]}>
                         <Text numberOfLines={1} style={[styles.title, completedStyle]}>
-                            {taskTitle}
+                            {titre}
                         </Text>
                         <Text
                             style={[
@@ -199,7 +199,7 @@ export default function ItemNotif({taskTitle,taskContent, taskTime, isCompleted}
                                 },
                                 completedStyle,
                             ]}>
-                            {moment(taskTime).format('hh:mm a')}
+                            {description}
                         </Text>
                     </View>
 
