@@ -1,6 +1,6 @@
 // local imgs
 
-//const Logo = require('../../../../../../assets/images');
+const Logo = require('../../../../../../assets/images/Logo.png');
 
 // internet imgs
 
@@ -22,5 +22,5 @@ const Products = {
 };
 
 export default {
-  //Logo,
+  Logo,
 };

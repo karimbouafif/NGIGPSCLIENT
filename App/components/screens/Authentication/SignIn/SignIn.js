@@ -20,7 +20,7 @@ interface IState {
 export default function SignIn({navigation}) {
   const theme = useTheme();
   const passwordRef = useRef(null);
-  const [emaillogin, setEmail] = useState("jihed.galai@esprit.tn");
+  const [emaillogin, setEmail] = useState("zied.bouafif@esprit.tn");
   const [passwordlogin, setPassword] = useState("123456");
   const {user} = useSelector((state: IState) => state.loginReducer);
   const dispatch = useDispatch();

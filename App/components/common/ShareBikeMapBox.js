@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import styles from '../screens/Tabs/Menu/Styles/FindMyWayScreenStyle'
 import MapboxGL from "@react-native-mapbox-gl/maps";
-import Logger from '@react-native-mapbox-gl/maps/javascript/utils/Logger';
+
 import  MapView  from './MapBox/MapView';
 MapboxGL.setAccessToken("pk.eyJ1Ijoia2FyaW1lc3ByaXQiLCJhIjoiY2szYm1vaWNjMG5qdjNvcXR6ZmI0eWE2OCJ9.Zcpnxn-I0W6JjZWdzIl2bg");
 const api_key="pk.eyJ1Ijoia2FyaW1lc3ByaXQiLCJhIjoiY2szYm1vaWNjMG5qdjNvcXR6ZmI0eWE2OCJ9.Zcpnxn-I0W6JjZWdzIl2bg"

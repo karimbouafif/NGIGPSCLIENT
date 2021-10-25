@@ -3,12 +3,13 @@ import React, { Component } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native'
 
 import MapboxGL from '@react-native-mapbox-gl/maps';
-//import MapboxClient from 'mapbox';
+import MapboxClient from 'mapbox';
 
 import { multiLineString, lineString } from '@turf/helpers';
+import distance from '@turf/distance';
 const turfPoint = require('turf-point');
 
-import  Destination from "./Destination";
+import Destination from "./Destination";
 import Departure from "./Departure";
 import Route from "./Route";
 import {checkPermission} from 'react-native-android-permissions';
@@ -16,19 +17,19 @@ import Geolocation from '@react-native-community/geolocation';
 const api_key="pk.eyJ1Ijoia2FyaW1lc3ByaXQiLCJhIjoiY2szYm1vaWNjMG5qdjNvcXR6ZmI0eWE2OCJ9.Zcpnxn-I0W6JjZWdzIl2bg"
 type NavigationMode = 'Course' | 'Global';
 const {width, height} = Dimensions.get('window')
-
+import jwtDecode  from 'jwt-decode';
 const SCREEN_HEIGHT = height
 const SCREEN_WIDTH = width
 const ASPECT_RATIO = width / height
 const LATITUDE_DELTA = 0.0922
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
 type Location = {
-	latitude: number,
+  latitude: number,
   longitude: number,
 };
 
 type MapViewProps = {
-	mapBoxApiKey: string,
+  mapBoxApiKey: string,
   navigationMode: NavigationMode,
   startingPoint: Location,
   endingPoint: Location,
@@ -36,9 +37,9 @@ type MapViewProps = {
 };
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-	},
+  container: {
+    flex: 1,
+  },
 });
 
 export default class MapView extends Component<MapViewProps> {
@@ -62,7 +63,7 @@ export default class MapView extends Component<MapViewProps> {
 
   componentWillReceiveProps(nextProps) {
     if (JSON.stringify(nextProps.startingPoint) !== JSON.stringify(this.state.startingPoint) ||
-        JSON.stringify(nextProps.endingPoint) !== JSON.stringify(this.state.endingPoint)) {
+      JSON.stringify(nextProps.endingPoint) !== JSON.stringify(this.state.endingPoint)) {
       this.downloadRoute();
     }
   }

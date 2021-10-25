@@ -33,7 +33,7 @@ export default function Quick() {
             console.log("userC")
             console.log(userId)
             const result = await axios(
-                'http://192.168.1.21:4000/api/missions/'+userId,
+                'http://192.168.2.139:4000/api/missions/'+userId,
             );
             //console.log("Affichage les missions by user   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             console.log(result.data);

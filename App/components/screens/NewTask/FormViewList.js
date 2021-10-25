@@ -44,7 +44,7 @@ export default function ViewTaskForm() {
             console.log("userC")
             console.log(userId)
             const result = await axios(
-                'http://192.168.1.21:4000/api/reclamations/'+userId,
+                'http://192.168.2.118:4000/api/reclamations/'+userId,
             );
             //console.log("Affichage les missions by user   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             console.log(result.data);

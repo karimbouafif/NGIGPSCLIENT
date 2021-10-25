@@ -84,7 +84,7 @@ export default function Profile  ()  {
             <Caption>Active</Caption>
           </View>
           <View style={styles.infoBox}>
-            <Title>12</Title>
+            <Title>3</Title>
             <Caption>Missions</Caption>
           </View>
         </View>
